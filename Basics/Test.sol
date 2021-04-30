@@ -6,10 +6,9 @@ contract Test {
     // payable => ether can be paid to the address
     address payable public owner;
     /*
-    enum =>
-    
-    collection of immutable options
-    */
+     * enum =>
+     * collection of immutable options
+     */
     enum Status { Vacant, Occupied }
     Status currentStatus;
     
@@ -21,29 +20,26 @@ contract Test {
     }
     
     /*
-    modifier =>
-    
-    includes a "require" statement, checks if condition
-    is met in the function else returns error message
-    */
+     * modifier =>
+     * includes a "require" statement, checks if condition
+     * is met in the function else returns error message
+     */
     modifier checkVacancy {
         require(currentStatus == Status.Vacant, "Room is occupied");
         _;
     }
     
     /*
-    receive() =>
-    
-    it is a special function which runs when the
-    smart contract owner receives a payment
-    */
+     * receive() =>
+     * it is a special function which runs when the
+     * smart contract owner receives a payment
+     */
     receive() external payable checkVacancy {
         /*
-        require(condition, error_message) =>
-        
-        if the condition is true, continues to
-        run the function else returns error message
-        */
+         * require(condition, error_message) =>
+         * if the condition is true, continues to
+         * run the function else returns error message
+         */
         require(msg.value == 1 ether, "Wrong amount");
         
         currentStatus = Status.Occupied;
