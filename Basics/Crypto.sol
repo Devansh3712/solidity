@@ -21,8 +21,12 @@ contract Crypto {
         _;
     }
     
-    function mint(address receiver, uint amount) isOwner public {
-        require(amount < 1e60);
+    modifier maxAmount(uint amount) {
+        require(amount < 1e60, "Beyond maximum amount");
+        _;
+    }
+    
+    function mint(address receiver, uint amount) isOwner maxAmount(amount) public {
         balances[receiver] += amount;
     }
     
