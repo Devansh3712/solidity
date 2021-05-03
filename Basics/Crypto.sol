@@ -47,4 +47,8 @@ contract Crypto {
         emit Sent(msg.sender, receiver, amount);
     }
     
+    function showBalance(address _account) external view returns (uint) {
+        return balances[_account];
+    }
+    
 }
